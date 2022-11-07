@@ -163,14 +163,15 @@ function RegisterPage() {
   const title = 'Sign Up';
   return (
     <ScreenGrid>
-      <FormGrid>
-        <Grid
-          container
-          spacing={0}
-          justifyContent="center"
-          sx={{ border: 1, height: '100%' }}
-        >
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ padding: 5 }}>
+      <Grid
+        container
+        spacing={0}
+        alignItems="center"
+        justifyContent="center"
+        sx={{ height: '100vh' }}
+      >
+        <Grid item md={6} xs={12} sx={{ padding: 5 }}>
+          <FormGrid>
             <FormCol>
               <Grid item container justifyContent="center">
                 <Typography variant="h2">{title}</Typography>
@@ -287,21 +288,21 @@ function RegisterPage() {
                 </Grid>
               </FormRow>
             </FormCol>
-          </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ bgcolor: '#EDEBEB' }}>
-            <Typography variant="h2" textAlign="center" />
-          </Grid>
-          {/* The alert that pops up */}
-          <Grid item>
-            <AlertDialog
-              showAlert={showError.alert}
-              title={alertTitle}
-              message={errorMessage.alert}
-              onClose={handleAlertClose}
-            />
-          </Grid>
+          </FormGrid>
         </Grid>
-      </FormGrid>
+        <Grid item md={6} xs={12} sx={{ height: '100vh', bgcolor: '#EDEBEB' }}>
+          <Typography variant="h2" textAlign="center" />
+        </Grid>
+        {/* The alert that pops up */}
+        <Grid item>
+          <AlertDialog
+            showAlert={showError.alert}
+            title={alertTitle}
+            message={errorMessage.alert}
+            onClose={handleAlertClose}
+          />
+        </Grid>
+      </Grid>
     </ScreenGrid>
   );
 }
