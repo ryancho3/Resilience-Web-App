@@ -46,11 +46,12 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
-                  </Route>
-                  {/* Routes accessed only if user is authenticated */}
-                  <Route element={<ProtectedRoutesWrapper />}>
                     <Route path="/home" element={<HomePage />} />
                   </Route>
+                  {/* Routes accessed only if user is authenticated */}
+                  {/* <Route element={<ProtectedRoutesWrapper />}>
+                    
+                  </Route> */}
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
                   </Route>
