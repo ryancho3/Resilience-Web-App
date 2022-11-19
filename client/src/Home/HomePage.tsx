@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { Typography, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
 import {
   logout as logoutAction,
@@ -11,6 +10,9 @@ import {
 import { logout as logoutApi, selfUpgrade } from './api';
 import ScreenGrid from '../components/ScreenGrid';
 import PrimaryButton from '../components/buttons/PrimaryButton';
+import Header from '../components/global/Header';
+import SearchComponent from '../components/search/SearchComponent';
+import { getData } from '../util/api';
 
 interface PromoteButtonProps {
   admin: boolean | null;
@@ -60,6 +62,7 @@ function HomePage() {
       navigator('/login', { replace: true });
     }
   };
+  const data = getData('citation/citations');
 
   const handleSelfPromote = async () => {
     const newAdminStatus = await selfUpgrade(user.email as string);
@@ -69,20 +72,33 @@ function HomePage() {
     }
   };
 
-  const message = `Welcome to the Boilerplate, ${user.firstName} ${user.lastName}!`;
+  // const message = `Welcome to the Boilerplate, ${user.firstName} ${user.lastName}!`;
   return (
     <ScreenGrid>
-      <Typography variant="h2">{message}</Typography>
-      <Grid item container justifyContent="center">
+      <Header />
+      {/* <Typography variant="h2">{message}</Typography> */}
+      <Grid container>
+        <Grid item flexDirection="row" xs={12} sx={{ paddingY: 2 }}>
+          <SearchComponent />
+        </Grid>
+      </Grid>
+      {/* <SearchComponent /> */}
+      {/* <Grid
+        item
+        container
+        justifyContent="center"
+        xs={12}
+        sx={{ backgroundColor: 'green', padding: 10, height: 100 }}
+      >
         <PromoteButton
           admin={admin}
           handleSelfPromote={handleSelfPromote}
           navigator={navigator}
         />
       </Grid>
-      <Grid item container justifyContent="center">
+      <Grid justifyContent="center">
         <Button onClick={handleLogout}>Logout</Button>
-      </Grid>
+      </Grid> */}
     </ScreenGrid>
   );
 }
