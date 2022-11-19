@@ -1,4 +1,9 @@
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import React from 'react';
 
 interface StateComponentProps {
@@ -71,28 +76,29 @@ export default function StateComponent({
     setSelectState(event.target.value as string);
   };
   return (
-    <Select
-      labelId="state-select-label"
-      id="state-select"
-      fullWidth
-      MenuProps={{
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'left',
-        },
-        transformOrigin: {
-          vertical: 'top',
-          horizontal: 'left',
-        },
-      }}
-      value={selectedState}
-      label="State"
-      onChange={handleChange}
-      variant="filled"
-    >
-      {states.map((state) => (
-        <MenuItem value={state}>{state}</MenuItem>
-      ))}
-    </Select>
+    <FormControl fullWidth>
+      <Select
+        labelId="state-select-label"
+        id="state-select"
+        MenuProps={{
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'left',
+          },
+          transformOrigin: {
+            vertical: 'top',
+            horizontal: 'left',
+          },
+        }}
+        value={selectedState}
+        label="State"
+        onChange={handleChange}
+        variant="filled"
+      >
+        {states.map((state) => (
+          <MenuItem value={state}>{state}</MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
