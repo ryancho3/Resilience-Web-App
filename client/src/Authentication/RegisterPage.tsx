@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link, TextField, Grid, Typography } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import FormCol from '../components/form/FormCol';
 import {
   emailRegex,
@@ -24,6 +29,7 @@ function RegisterPage() {
 
   // Default values for state
   const defaultValues = {
+    role: 'fip',
     firstName: '',
     lastName: '',
     email: '',
@@ -31,6 +37,7 @@ function RegisterPage() {
     confirmPassword: '',
   };
   const defaultShowErrors = {
+    role: '',
     firstName: false,
     lastName: false,
     email: false,
@@ -39,6 +46,7 @@ function RegisterPage() {
     alert: false,
   };
   const defaultErrorMessages = {
+    role: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -132,7 +140,13 @@ function RegisterPage() {
 
   async function handleSubmit() {
     if (validateInputs()) {
-      register(values.firstName, values.lastName, values.email, values.password)
+      register(
+        values.role,
+        values.firstName,
+        values.lastName,
+        values.email,
+        values.password,
+      )
         .then(() => {
           setShowError('alert', true);
           setAlertTitle('');
@@ -146,102 +160,139 @@ function RegisterPage() {
     }
   }
 
-  const title = "Let's get started";
+  const title = 'Sign Up';
   return (
     <ScreenGrid>
-      <FormGrid>
-        <FormCol>
-          <Grid item container justifyContent="center">
-            <Typography variant="h2">{title}</Typography>
-          </Grid>
-          <FormRow>
-            <Grid item width=".5">
-              <TextField
-                fullWidth
-                error={showError.firstName}
-                helperText={errorMessage.firstName}
-                size="small"
-                type="text"
-                required
-                label="First Name"
-                value={values.firstName}
-                onChange={(e) => setValue('firstName', e.target.value)}
-              />
-            </Grid>
-            <Grid item width=".5">
-              <TextField
-                fullWidth
-                error={showError.lastName}
-                helperText={errorMessage.lastName}
-                size="small"
-                type="text"
-                required
-                label="Last Name"
-                value={values.lastName}
-                onChange={(e) => setValue('lastName', e.target.value)}
-              />
-            </Grid>
-          </FormRow>
-          <Grid item width="1">
-            <TextField
-              fullWidth
-              error={showError.email}
-              helperText={errorMessage.email}
-              size="small"
-              type="text"
-              required
-              label="Email"
-              value={values.email}
-              onChange={(e) => setValue('email', e.target.value)}
-            />
-          </Grid>
-          <FormRow>
-            <Grid item width=".5">
-              <TextField
-                fullWidth
-                error={showError.password}
-                helperText={errorMessage.password}
-                size="small"
-                type="password"
-                required
-                label="Password"
-                value={values.password}
-                onChange={(e) => setValue('password', e.target.value)}
-              />
-            </Grid>
-            <Grid item container width=".5">
-              <TextField
-                fullWidth
-                error={showError.confirmPassword}
-                helperText={errorMessage.confirmPassword}
-                size="small"
-                type="password"
-                required
-                label=" Confirm Password"
-                value={values.confirmPassword}
-                onChange={(e) => setValue('confirmPassword', e.target.value)}
-              />
-            </Grid>
-          </FormRow>
-          <Grid item container justifyContent="center">
-            <PrimaryButton
-              fullWidth
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={() => handleSubmit()}
-            >
-              Register
-            </PrimaryButton>
-          </Grid>
-          <FormRow>
-            <Grid container justifyContent="center">
-              <Link component={RouterLink} to="../">
-                Back to Login
-              </Link>
-            </Grid>
-          </FormRow>
-        </FormCol>
+      <Grid
+        container
+        spacing={0}
+        alignItems="center"
+        justifyContent="center"
+        sx={{ height: '100vh' }}
+      >
+        <Grid item md={6} xs={12} sx={{ padding: 5 }}>
+          <FormGrid>
+            <FormCol>
+              <Grid item container justifyContent="center">
+                <Typography variant="h2">{title}</Typography>
+              </Grid>
+              <Grid item width="1">
+                <FormControl>
+                  <FormLabel id="role">I am an...</FormLabel>
+                  <RadioGroup
+                    row
+                    aria-labelledby="role"
+                    defaultValue="fip"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="fip"
+                      control={<Radio />}
+                      label="FIP"
+                    />
+                    <FormControlLabel
+                      value="hr"
+                      control={<Radio />}
+                      label="HR Manager"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <FormRow>
+                <Grid item width=".5">
+                  <TextField
+                    fullWidth
+                    error={showError.firstName}
+                    helperText={errorMessage.firstName}
+                    size="small"
+                    type="text"
+                    required
+                    label="First Name"
+                    value={values.firstName}
+                    onChange={(e) => setValue('firstName', e.target.value)}
+                  />
+                </Grid>
+                <Grid item width=".5">
+                  <TextField
+                    fullWidth
+                    error={showError.lastName}
+                    helperText={errorMessage.lastName}
+                    size="small"
+                    type="text"
+                    required
+                    label="Last Name"
+                    value={values.lastName}
+                    onChange={(e) => setValue('lastName', e.target.value)}
+                  />
+                </Grid>
+              </FormRow>
+              <Grid item width="1">
+                <TextField
+                  fullWidth
+                  error={showError.email}
+                  helperText={errorMessage.email}
+                  size="small"
+                  type="text"
+                  required
+                  label="Email"
+                  value={values.email}
+                  onChange={(e) => setValue('email', e.target.value)}
+                />
+              </Grid>
+              <FormRow>
+                <Grid item width=".5">
+                  <TextField
+                    fullWidth
+                    error={showError.password}
+                    helperText={errorMessage.password}
+                    size="small"
+                    type="password"
+                    required
+                    label="Password"
+                    value={values.password}
+                    onChange={(e) => setValue('password', e.target.value)}
+                  />
+                </Grid>
+                <Grid item container width=".5">
+                  <TextField
+                    fullWidth
+                    error={showError.confirmPassword}
+                    helperText={errorMessage.confirmPassword}
+                    size="small"
+                    type="password"
+                    required
+                    label=" Confirm Password"
+                    value={values.confirmPassword}
+                    onChange={(e) =>
+                      setValue('confirmPassword', e.target.value)
+                    }
+                  />
+                </Grid>
+              </FormRow>
+              <Grid item container justifyContent="center">
+                <PrimaryButton
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleSubmit()}
+                >
+                  Create account
+                </PrimaryButton>
+              </Grid>
+              <FormRow>
+                <Grid container justifyContent="center">
+                  <Link component={RouterLink} to="../">
+                    Back to Login
+                  </Link>
+                </Grid>
+              </FormRow>
+            </FormCol>
+          </FormGrid>
+        </Grid>
+        <Grid item md={6} xs={12} sx={{ height: '100vh', bgcolor: '#EDEBEB' }}>
+          <Typography variant="h2" textAlign="center" />
+        </Grid>
         {/* The alert that pops up */}
         <Grid item>
           <AlertDialog
@@ -251,7 +302,7 @@ function RegisterPage() {
             onClose={handleAlertClose}
           />
         </Grid>
-      </FormGrid>
+      </Grid>
     </ScreenGrid>
   );
 }

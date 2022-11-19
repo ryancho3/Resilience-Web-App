@@ -38,6 +38,7 @@ async function verifyAccount(verificationToken: string) {
 
 /**
  * Sends a request to the server to register a user for an account
+ * @param role
  * @param firstName
  * @param lastName
  * @param email
@@ -45,6 +46,7 @@ async function verifyAccount(verificationToken: string) {
  * @throws An {@link Error} with a `messsage` field describing the issue in verifying
  */
 async function register(
+  role: string,
   firstName: string,
   lastName: string,
   email: string,
@@ -52,6 +54,7 @@ async function register(
 ) {
   const lowercaseEmail = email.toLowerCase();
   const res = await postData('auth/register', {
+    role,
     firstName,
     lastName,
     email: lowercaseEmail,
