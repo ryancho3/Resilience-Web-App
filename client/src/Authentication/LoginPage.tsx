@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Link, Typography, Grid } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { palette } from '@mui/system';
 import { useAppDispatch } from '../util/redux/hooks';
 import { login as loginRedux } from '../util/redux/userSlice';
 import FormGrid from '../components/form/FormGrid';
@@ -130,61 +131,81 @@ function LoginPage() {
 
   return (
     <ScreenGrid>
-      <FormGrid>
-        <FormCol>
-          <Grid item container justifyContent="center">
-            <Typography variant="h2" textAlign="center">
-              Welcome to Boilerplate
-            </Typography>
-          </Grid>
-          <Grid item width="1">
-            <TextField
-              fullWidth
-              error={showError.email}
-              helperText={errorMessage.email}
-              type="email"
-              required
-              label="Email"
-              value={values.email}
-              onChange={(e) => setValue('email', e.target.value)}
-            />
-          </Grid>
-          <Grid item width="1">
-            <TextField
-              fullWidth
-              error={showError.password}
-              helperText={errorMessage.password}
-              type="password"
-              required
-              label="Password"
-              value={values.password}
-              onChange={(e) => setValue('password', e.target.value)}
-            />
-          </Grid>
-          <Grid item container justifyContent="center">
-            <PrimaryButton
-              fullWidth
-              type="submit"
-              variant="contained"
-              onClick={() => handleSubmit()}
-            >
-              Login
-            </PrimaryButton>
-          </Grid>
-          <FormRow>
-            <Grid item>
-              <Link component={RouterLink} to="/email-reset">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link component={RouterLink} to="/register">
-                Sign up
-              </Link>
-            </Grid>
-          </FormRow>
-        </FormCol>
-      </FormGrid>
+      <Grid
+        container
+        spacing={0}
+        alignItems="center"
+        justifyContent="center"
+        sx={{ height: '100vh' }}
+      >
+        <Grid item lg={6} md={6} sm={12} xs={12} sx={{ padding: 5 }}>
+          <FormGrid>
+            <FormCol>
+              <Grid item container justifyContent="center">
+                <Typography variant="h2" textAlign="center">
+                  Log in
+                </Typography>
+              </Grid>
+              <Grid item width="1">
+                <TextField
+                  fullWidth
+                  error={showError.email}
+                  helperText={errorMessage.email}
+                  type="email"
+                  required
+                  label="Email"
+                  value={values.email}
+                  onChange={(e) => setValue('email', e.target.value)}
+                />
+              </Grid>
+              <Grid item width="1">
+                <TextField
+                  fullWidth
+                  error={showError.password}
+                  helperText={errorMessage.password}
+                  type="password"
+                  required
+                  label="Password"
+                  value={values.password}
+                  onChange={(e) => setValue('password', e.target.value)}
+                />
+              </Grid>
+              <Grid item container justifyContent="center">
+                <PrimaryButton
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  onClick={() => handleSubmit()}
+                >
+                  Login
+                </PrimaryButton>
+              </Grid>
+              <FormRow>
+                <Grid item>
+                  <Link component={RouterLink} to="/email-reset">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link component={RouterLink} to="/register">
+                    Sign up
+                  </Link>
+                </Grid>
+              </FormRow>
+            </FormCol>
+          </FormGrid>
+        </Grid>
+        <Grid
+          item
+          lg={6}
+          md={6}
+          sm={12}
+          xs={12}
+          sx={{ height: '100vh', bgcolor: '#EDEBEB' }}
+        >
+          <Typography variant="h2" textAlign="center" />
+        </Grid>
+      </Grid>
       {/* The alert that pops up */}
       <Grid item>
         <AlertDialog

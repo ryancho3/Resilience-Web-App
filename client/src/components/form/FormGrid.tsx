@@ -16,7 +16,7 @@ function FormGrid({ children }: AnyChildren) {
       container
       direction="column"
       rowSpacing={3}
-      xs={4}
+      xs={12}
       fontSize="0.75em"
     >
       {children}
