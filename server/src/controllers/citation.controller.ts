@@ -2,7 +2,7 @@
 import express from 'express';
 import StatusCode from '../util/statusCode';
 import ApiError from '../util/apiError';
-import { getCitationByJurisdiction } from '../services/citation.service';
+import { getCitationByParams } from '../services/citation.service';
 
 const getCitations = async (
   req: express.Request,
@@ -11,19 +11,28 @@ const getCitations = async (
 ) => {
   // eslint-disable-next-line camelcase
   const { jurisdiction, offense_type, keywords } = req.body;
-  if (offense_type || keywords) {
-    next(ApiError.forbidden);
-    return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const params: any = {};
+  if (jurisdiction) {
+    params.jurisdiction = jurisdiction;
+  }
+  if (offense_type) {
+    params.offense_type = offense_type;
+  }
+  if (keywords) {
+    params.keywords = { $regex: keywords };
   }
   return (
-    getCitationByJurisdiction(jurisdiction)
+    getCitationByParams(params)
       .then((citationList) => {
         res.status(StatusCode.OK).send(citationList);
       })
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .catch((e) => {
         next(
-          ApiError.internal('Unable to retrieve citation(s) from jurisdiction'),
+          ApiError.internal(
+            'Unable to retrieve citation(s) from given parameters',
+          ),
         );
       })
   );
