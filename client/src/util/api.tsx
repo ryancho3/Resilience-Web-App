@@ -55,6 +55,13 @@ async function getData(url: string) {
   return response;
 }
 
+async function getOutcomes(url: string, state: string) {
+  const response = await resolve(
+    axios.get(`${URLPREFIX}/${url}`, { params: { jurisdiction: state } }),
+  );
+  return response;
+}
+
 /**
  * A custom hook which makes a GET request to the server when given a url and returns the response data after it is resolved by the {@link resolve} function.
  * @param url - a string representing the url to make the request to. The format should be 'router/endpoint'
@@ -109,4 +116,4 @@ async function deleteData(url: string, data = {}) {
   return response;
 }
 
-export { getData, putData, deleteData, postData, useData };
+export { getData, getOutcomes, putData, deleteData, postData, useData };

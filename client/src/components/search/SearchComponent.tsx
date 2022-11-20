@@ -7,6 +7,7 @@ import {
   InputLabel,
   Typography,
 } from '@mui/material';
+import { getData, getOutcomes } from '../../util/api';
 import StateComponent from './StateComponent';
 import OffenseType from './OffenseTypeComponent';
 import KeyWords from './KeyWordsComponent';
@@ -15,6 +16,9 @@ export default function SearchComponent() {
   const [state, setSelectState] = useState('');
   const [offense, setSelectedOffense] = useState(['']);
   const [keywords, setSelectedKeyWords] = useState(['']);
+
+  const BACKENDURL = 'http://localhost:3000';
+  const URLPREFIX = `${BACKENDURL}/api`;
 
   return (
     // <FormControl fullWidth>
@@ -62,6 +66,20 @@ export default function SearchComponent() {
           }}
         >
           Reset Search
+        </Button>
+        <Button
+          sx={{ mt: 1, mr: 1 }}
+          type="submit"
+          variant="contained"
+          onClick={() => {
+            const newState = state.substring(5);
+
+            getOutcomes('citation/citations', newState).then((obj) => {
+              console.log(obj.data);
+            });
+          }}
+        >
+          Test
         </Button>
       </Grid>
       {/* // </FormControl> */}
