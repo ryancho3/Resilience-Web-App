@@ -3,7 +3,11 @@ import express from 'express';
 import url from 'url';
 import StatusCode from '../util/statusCode';
 import ApiError from '../util/apiError';
-import { getCitationByParams } from '../services/citation.service';
+import {
+  getCitationByParams,
+  getAllKeywordsFromDB,
+  getAllOffenseTypesFromDB,
+} from '../services/citation.service';
 
 const getCitations = async (
   req: express.Request,
@@ -42,5 +46,39 @@ const getCitations = async (
   );
 };
 
+const getAllKeywords = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  return (
+    getAllKeywordsFromDB()
+      .then((keywordList) => {
+        res.status(StatusCode.OK).send(keywordList);
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .catch((e) => {
+        next(ApiError.internal('Unable to retrieve all keywords'));
+      })
+  );
+};
+
+const getAllOffenseTypes = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  return (
+    getAllOffenseTypesFromDB()
+      .then((offenseTypeList) => {
+        res.status(StatusCode.OK).send(offenseTypeList);
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .catch((e) => {
+        next(ApiError.internal('Unable to retrieve all offense types'));
+      })
+  );
+};
+
 // eslint-disable-next-line import/prefer-default-export
-export { getCitations };
+export { getCitations, getAllKeywords, getAllOffenseTypes };
