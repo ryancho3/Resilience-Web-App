@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import qs from 'qs';
 import axios from 'axios';
+import { ListClassKey } from '@mui/material';
 
 // So cookies can be sent automatically with requests
 axios.defaults.withCredentials = true;
@@ -55,9 +58,23 @@ async function getData(url: string) {
   return response;
 }
 
-async function getOutcomes(url: string, state: string) {
+async function getOutcomes(
+  url: string,
+  state: string,
+  offenseType: string[],
+  keywords: string[],
+) {
   const response = await resolve(
-    axios.get(`${URLPREFIX}/${url}`, { params: { jurisdiction: state } }),
+    axios.get(`${URLPREFIX}/${url}`, {
+      params: {
+        jurisdiction: state,
+        offense_type: offenseType,
+        keywords,
+      },
+      paramsSerializer: {
+        indexes: null,
+      },
+    }),
   );
   return response;
 }

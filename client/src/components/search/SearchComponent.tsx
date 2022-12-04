@@ -60,9 +60,10 @@ export default function SearchComponent() {
           variant="contained"
           onClick={() => {
             setSelectedOffense([]);
+
             setSelectedKeyWords([]);
             setSelectState('');
-            // console.log(state, offense, keywords);
+            console.log(state, offense, keywords);
           }}
         >
           Reset Search
@@ -74,9 +75,11 @@ export default function SearchComponent() {
           onClick={() => {
             const newState = state.substring(5);
 
-            getOutcomes('citation/citations', newState).then((obj) => {
-              console.log(obj.data);
-            });
+            getOutcomes('citation/citations', newState, offense, keywords).then(
+              (obj) => {
+                console.log(obj.data);
+              },
+            );
           }}
         >
           Test
