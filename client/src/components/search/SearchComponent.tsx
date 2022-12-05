@@ -11,8 +11,10 @@ import { getData, getOutcomes } from '../../util/api';
 import StateComponent from './StateComponent';
 import OffenseType from './OffenseTypeComponent';
 import KeyWords from './KeyWordsComponent';
+import MapComponent from './MapComponent';
 
 export default function SearchComponent() {
+  const [mapState, setSelectedMapState] = useState('');
   const [state, setSelectState] = useState('');
   const [offense, setSelectedOffense] = useState(['']);
   const [keywords, setSelectedKeyWords] = useState(['']);
@@ -23,6 +25,14 @@ export default function SearchComponent() {
   return (
     // <FormControl fullWidth>
     <Box>
+      <Grid container alignItems="center" justifyContent="center">
+        <Grid item xs={8}>
+          <MapComponent
+            selectedMapState={mapState}
+            setSelectedMapState={setSelectedMapState}
+          />
+        </Grid>
+      </Grid>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item xs={3.5}>
           <StateComponent
@@ -60,10 +70,10 @@ export default function SearchComponent() {
           variant="contained"
           onClick={() => {
             setSelectedOffense([]);
-
             setSelectedKeyWords([]);
             setSelectState('');
-            console.log(state, offense, keywords);
+            setSelectedMapState('');
+            console.log(mapState, state, offense, keywords);
           }}
         >
           Reset Search
@@ -75,7 +85,7 @@ export default function SearchComponent() {
           onClick={() => {
             const newState = state.substring(5);
 
-            getOutcomes('citation/citations', newState, offense, keywords).then(
+            getOutcomes('citation/citations', mapState, offense, keywords).then(
               (obj) => {
                 console.log(obj.data);
               },
