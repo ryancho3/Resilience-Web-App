@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { Button, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
 import {
   logout as logoutAction,
@@ -13,6 +13,7 @@ import PrimaryButton from '../components/buttons/PrimaryButton';
 import Header from '../components/global/Header';
 import SearchComponent from '../components/search/SearchComponent';
 import { getData } from '../util/api';
+import OutputComponent from '../components/output/OutputComponent';
 
 interface PromoteButtonProps {
   admin: boolean | null;
@@ -76,11 +77,19 @@ function HomePage() {
   return (
     <ScreenGrid>
       <Header />
-      {/* <Typography variant="h2">{message}</Typography> */}
       <Grid container>
         <Grid item flexDirection="row" xs={12} sx={{ paddingY: 2 }}>
           <SearchComponent />
         </Grid>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          // minHeight="100vh"
+        >
+          <OutputComponent />
+        </Box>
       </Grid>
       {/* <SearchComponent /> */}
       {/* <Grid
