@@ -49,6 +49,11 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  history: {
+    type: Array,
+    required: true,
+    default: [],
+  }
 });
 
 interface IUser extends mongoose.Document {
@@ -61,6 +66,7 @@ interface IUser extends mongoose.Document {
   verificationToken: string | null | undefined;
   resetPasswordToken: string | null | undefined;
   resetPasswordTokenExpiryDate: Date | null | undefined;
+  history: Array<Object> | null;
   admin: boolean;
 }
 

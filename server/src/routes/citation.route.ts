@@ -11,4 +11,5 @@ router.get('/citations', getCitations);
 router.get('/keywords/all', getAllKeywords);
 router.get('/offense_type/all', getAllOffenseTypes);
 
+
 export default router;

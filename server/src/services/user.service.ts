@@ -141,6 +141,13 @@ const deleteUserById = async (id: string) => {
   return user;
 };
 
+const addHistoryById = async (id: string, params: {}) => {
+  const user = await User.findByIdAndUpdate(id,
+    { $push: { history: params } },
+  ).exec();
+  return user
+};
+
 export {
   passwordHashSaltRounds,
   createUser,
@@ -152,4 +159,5 @@ export {
   getAllUsersFromDB,
   upgradeUserToAdmin,
   deleteUserById,
+  addHistoryById,
 };
