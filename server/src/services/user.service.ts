@@ -141,11 +141,12 @@ const deleteUserById = async (id: string) => {
   return user;
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 const addHistoryById = async (id: string, params: {}) => {
-  const user = await User.findByIdAndUpdate(id,
-    { $push: { history: params } },
-  ).exec();
-  return user
+  const user = await User.findByIdAndUpdate(id, {
+    $push: { history: params },
+  }).exec();
+  return user;
 };
 
 export {
