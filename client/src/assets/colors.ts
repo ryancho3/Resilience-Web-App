@@ -14,7 +14,7 @@ const COLORS = {
   // Main colors above ~~~ Extra colors below
   primaryDark: '#172a3a', // Dark Blue
   primaryDark2: '#2e5987', // Dark Blue level 2
-  background: '#d7fdff', // Light Light Blue
+  background: '#e6ebdb', // Light Light Blue
   accentOrange: '#f2594b',
   neutral: '#8c8c8c', // Gray
   lightGray: '#ebeff2', // Gray-subsection

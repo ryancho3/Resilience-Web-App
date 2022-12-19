@@ -39,6 +39,8 @@ const theme = createTheme({
       'Droid Sans',
       'Helvetica Neue',
       'sans-serif',
+      'Druk Trial',
+      'Tiempos Headline',
     ].join(','),
   },
   components: {

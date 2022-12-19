@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { AnyChildren } from '../util/types/generic';
+import COLORS from '../assets/colors';
 
 /**
  * This styles a the whole screen as a grid component, serves as a wrapper to ensure
@@ -13,10 +14,13 @@ function ScreenGrid({ children }: AnyChildren) {
     <Grid
       container
       xs={12}
-      height="100vh"
+      // height="100vh"
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
+      sx={{
+        backgroundColor: COLORS.background,
+      }}
     >
       {children}
     </Grid>
