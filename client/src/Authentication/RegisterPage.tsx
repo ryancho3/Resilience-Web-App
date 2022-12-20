@@ -18,6 +18,7 @@ import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import ScreenGrid from '../components/ScreenGrid';
 import FormRow from '../components/form/FormRow';
+import SliderButton from '../components/buttons/SliderButton';
 import FormGrid from '../components/form/FormGrid';
 
 /**
@@ -158,6 +159,7 @@ function RegisterPage() {
           setErrorMessage('alert', e.message);
         });
     }
+    console.log(values.role);
   }
 
   const title = 'Sign Up';
@@ -179,23 +181,7 @@ function RegisterPage() {
               <Grid item width="1">
                 <FormControl>
                   <FormLabel id="role">I am an...</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="role"
-                    defaultValue="fip"
-                    name="row-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="fip"
-                      control={<Radio />}
-                      label="FIP"
-                    />
-                    <FormControlLabel
-                      value="hr"
-                      control={<Radio />}
-                      label="HR Manager"
-                    />
-                  </RadioGroup>
+                  <SliderButton setRole={setValue} role={values.role} />
                 </FormControl>
               </Grid>
               <FormRow>
