@@ -10,6 +10,7 @@ const COLORS = {
   taupe: '#e6ebdb',
   black: '#000000', // Black
   white: '#ffffff', // White
+  offWhite: '#F5F5F5',
   gray: '#657788',
   // Main colors above ~~~ Extra colors below
   primaryDark: '#172a3a', // Dark Blue
@@ -18,6 +19,7 @@ const COLORS = {
   accentOrange: '#f2594b',
   neutral: '#8c8c8c', // Gray
   lightGray: '#ebeff2', // Gray-subsection
+  secondaryGray: '#808080', // gray text for slider
   actionBlue: '#155da1', // Action button
 
   // Other colors:

@@ -15,9 +15,10 @@ export default function SliderButton({ setRole, role }: SliderButtonProps) {
   // const [formerColor, setFormerColor] = useState(tabs[0].color);
 
   const containerStyle = {
+    height: 60,
     position: 'relative',
     borderRadius: 50,
-    backgroundColor: COLORS.lightGray,
+    backgroundColor: COLORS.offWhite,
     padding: 10,
     display: 'flex',
     alignContent: 'flex-start',
@@ -32,7 +33,6 @@ export default function SliderButton({ setRole, role }: SliderButtonProps) {
     margin: 0,
     fontFamily: 'sans-serif',
     fontSize: 20,
-    fontWeight: 700,
     color: '#222',
     cursor: 'pointer',
     display: 'flex',
@@ -59,10 +59,12 @@ export default function SliderButton({ setRole, role }: SliderButtonProps) {
           initial={{
             color:
               role === item.split(' ')[0].toLowerCase() ? '#FFF' : COLORS.gray,
+            fontWeight: role === item.split(' ')[0].toLowerCase() ? 700 : 400,
           }}
           animate={{
             color:
               role === item.split(' ')[0].toLowerCase() ? '#FFF' : COLORS.gray,
+            fontWeight: role === item.split(' ')[0].toLowerCase() ? 700 : 400,
           }}
           transition={{ duration }}
           onTap={() => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, TextField, Grid, Typography } from '@mui/material';
+import { Link, TextField, Grid, Typography, colors } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -20,6 +20,7 @@ import ScreenGrid from '../components/ScreenGrid';
 import FormRow from '../components/form/FormRow';
 import SliderButton from '../components/buttons/SliderButton';
 import FormGrid from '../components/form/FormGrid';
+import COLORS from '../assets/colors';
 
 /**
  * A page users visit to be able to register for a new account by inputting
@@ -139,6 +140,10 @@ function RegisterPage() {
     return isValid;
   };
 
+  const textFieldStyle = {
+    background: COLORS.offWhite,
+  };
+
   async function handleSubmit() {
     if (validateInputs()) {
       register(
@@ -175,7 +180,7 @@ function RegisterPage() {
         <Grid item md={6} xs={12} sx={{ padding: 5 }}>
           <FormGrid>
             <FormCol>
-              <Grid item container justifyContent="center">
+              <Grid item container justifyContent="left">
                 <Typography variant="h2">{title}</Typography>
               </Grid>
               <Grid item width="1">
@@ -196,6 +201,7 @@ function RegisterPage() {
                     label="First Name"
                     value={values.firstName}
                     onChange={(e) => setValue('firstName', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
                 <Grid item width=".5">
@@ -209,6 +215,7 @@ function RegisterPage() {
                     label="Last Name"
                     value={values.lastName}
                     onChange={(e) => setValue('lastName', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
               </FormRow>
@@ -223,6 +230,7 @@ function RegisterPage() {
                   label="Email"
                   value={values.email}
                   onChange={(e) => setValue('email', e.target.value)}
+                  style={textFieldStyle as React.CSSProperties}
                 />
               </Grid>
               <FormRow>
@@ -237,6 +245,7 @@ function RegisterPage() {
                     label="Password"
                     value={values.password}
                     onChange={(e) => setValue('password', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
                 <Grid item container width=".5">
@@ -252,6 +261,7 @@ function RegisterPage() {
                     onChange={(e) =>
                       setValue('confirmPassword', e.target.value)
                     }
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
               </FormRow>
@@ -276,7 +286,12 @@ function RegisterPage() {
             </FormCol>
           </FormGrid>
         </Grid>
-        <Grid item md={6} xs={12} sx={{ height: '100vh', bgcolor: '#EDEBEB' }}>
+        <Grid
+          item
+          md={6}
+          xs={12}
+          sx={{ height: '100vh', bgcolor: COLORS.primaryGreen }}
+        >
           <Typography variant="h2" textAlign="center" />
         </Grid>
         {/* The alert that pops up */}
