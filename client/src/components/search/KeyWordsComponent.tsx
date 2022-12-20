@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
 
@@ -29,6 +30,7 @@ export default function KeyWords({
 }: KeyWordComponentProps) {
   return (
     <Autocomplete
+      fullWidth
       disablePortal
       multiple
       filterSelectedOptions
@@ -38,9 +40,19 @@ export default function KeyWords({
       onChange={(event, newValue) => {
         setSelectedKeyWords(newValue);
       }}
-      fullWidth
+      // sx={{
+      //   display: 'inline-block',
+      //   '& input': {
+      //     borderRadius: 8,
+      //     bgcolor: 'white',
+      //     color: (theme) =>
+      //       theme.palette.getContrastText(theme.palette.background.paper),
+      //   },
+      // }}
       // eslint-disable-next-line react/jsx-props-no-spreading
-      renderInput={(params) => <TextField {...params} label="Key Words" />}
+      renderInput={(params) => (
+        <TextField variant="outlined" {...params} label="Key Words" />
+      )}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
           // console.log(event.currentTarget.);

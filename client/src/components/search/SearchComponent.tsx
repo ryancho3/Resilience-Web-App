@@ -72,7 +72,12 @@ export default function SearchComponent() {
       >
         <Grid item container xs={12} justifyContent="center">
           <Grid item container justifyContent="center" xs={3.5}>
-            <Typography sx={{ mb: 1.5 }}>
+            <Typography
+              fontFamily="Tiempos Headline"
+              fontWeight={200}
+              fontSize={20}
+              sx={{ mb: 1.5 }}
+            >
               Please input your jurisdiction
             </Typography>
             <StateComponent
@@ -83,7 +88,12 @@ export default function SearchComponent() {
         </Grid>
         <Grid item container xs={12} justifyContent="center">
           <Grid item container justifyContent="center" xs={3.5}>
-            <Typography sx={{ mb: 1.5 }}>
+            <Typography
+              fontFamily="Tiempos Headline"
+              fontWeight={200}
+              fontSize={20}
+              sx={{ mb: 1.5 }}
+            >
               Please input your offense type
             </Typography>
             <OffenseType
@@ -94,7 +104,12 @@ export default function SearchComponent() {
         </Grid>
         <Grid item container xs={12} justifyContent="center">
           <Grid item container justifyContent="center" xs={3.5}>
-            <Typography sx={{ mb: 1.5 }}>
+            <Typography
+              fontFamily="Tiempos Headline"
+              fontWeight={200}
+              fontSize={20}
+              sx={{ mb: 1.5 }}
+            >
               Please input industry related keywords
             </Typography>
             <KeyWords

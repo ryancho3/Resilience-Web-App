@@ -7,8 +7,11 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const nav = useNavigate();
+
   const navItems = ['Search Directory', 'Search History'];
 
   return (
@@ -43,11 +46,17 @@ export default function Header() {
               },
             }}
           >
-            {navItems.map((item) => (
+            {navItems.map((item, i) => (
               <Button
-                color="inherit"
+                color="secondary"
                 onClick={() => {
-                  console.log('go to ', item);
+                  if (i === 1) {
+                    nav('/login');
+                  } else {
+                    nav('/home');
+                  }
+                  console.log('your on');
+                  // console.log('go to ', item);
                 }}
               >
                 {item}
