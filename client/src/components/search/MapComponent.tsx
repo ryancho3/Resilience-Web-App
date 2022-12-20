@@ -1,6 +1,5 @@
 import {
   ComposableMap,
-  ZoomableGroup,
   Geographies,
   Geography,
   Marker,
@@ -10,7 +9,6 @@ import React from 'react';
 import { geoCentroid, geoAlbersUsa } from 'd3-geo';
 
 import allStates from 'client/src/assets/allstates.json';
-import { red } from '@mui/material/colors';
 
 const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
@@ -24,8 +22,6 @@ const offsets = {
   DE: [33, 0],
   MD: [47, 10],
 };
-
-const offsetKeys = Object.keys(offsets);
 
 interface MapComponentProps {
   selectedMapState: string;
@@ -56,7 +52,7 @@ export default function MapComponent({
                     fill:
                       selectedMapState === geo.properties.name
                         ? '#0D4E45' // yes - dark green
-                        : '#ECEFF1', // no - grayish
+                        : 'transparent', // no - transparent
                     stroke: '#607D8B',
                     strokeWidth: 0.75,
                     outline: 'none',
@@ -89,7 +85,7 @@ export default function MapComponent({
                     centroid[0] < -67 &&
                     (Object.keys(offsets).indexOf(cur.id) === -1 ? (
                       <Marker coordinates={centroid}>
-                        <text y="2" fontSize={14} textAnchor="middle">
+                        <text y="2" fontSize={12} textAnchor="middle">
                           {cur.id}
                         </text>
                       </Marker>

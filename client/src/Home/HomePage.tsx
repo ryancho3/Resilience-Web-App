@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
@@ -13,6 +13,9 @@ import PrimaryButton from '../components/buttons/PrimaryButton';
 import Header from '../components/global/Header';
 import SearchComponent from '../components/search/SearchComponent';
 import { getData } from '../util/api';
+import COLORS from '../assets/colors';
+import { selectCitations } from '../util/redux/citationSlice';
+import CitationProp, { sizes } from '../components/CitationFormat';
 
 interface PromoteButtonProps {
   admin: boolean | null;
@@ -62,7 +65,6 @@ function HomePage() {
       navigator('/login', { replace: true });
     }
   };
-  const data = getData('citation/citations');
 
   const handleSelfPromote = async () => {
     const newAdminStatus = await selfUpgrade(user.email as string);
@@ -72,16 +74,102 @@ function HomePage() {
     }
   };
 
+  // const results = useRef(null);
+  const results = useAppSelector(selectCitations).citations;
+
+  const categories = [
+    'Title',
+    'Discretion',
+    'Jurisdiction',
+    'Offense',
+    'Keywords',
+    'Duration',
+    'Citation Link',
+  ];
+
   // const message = `Welcome to the Boilerplate, ${user.firstName} ${user.lastName}!`;
   return (
     <ScreenGrid>
       <Header />
-      {/* <Typography variant="h2">{message}</Typography> */}
+      <Grid container justifyContent="center" sx={{ marginTop: 12 }}>
+        <Grid item container xs={9} justifyContent="center">
+          <Typography
+            variant="h3"
+            fontFamily="Druk Trial"
+            fontWeight={700}
+            noWrap
+            color={COLORS.primaryGreen}
+            sx={{
+              // backgroundColor: COLORS.secondaryGreen,
+              padding: 1,
+              marginBottom: 2,
+            }}
+          >
+            Collateral Consequences Dashboard
+          </Typography>
+          <Typography
+            variant="h6"
+            textAlign="center"
+            justifyContent="center"
+            fontFamily="Tiempos Headline"
+          >
+            Use the categories below to search and view details of policies
+            relating to collateral consequences of a criminal conviction.
+          </Typography>
+        </Grid>
+      </Grid>
       <Grid container>
         <Grid item flexDirection="row" xs={12} sx={{ paddingY: 2 }}>
           <SearchComponent />
         </Grid>
       </Grid>
+      {results.length > 0 && (
+        <Grid
+          container
+          justifyItems="center"
+          display="grid"
+          gridTemplateRows="repeat(5, 1fr)"
+          rowSpacing={1}
+          marginTop={3}
+        >
+          <Grid
+            item
+            container
+            xs={11.5}
+            border="#B7C8BA"
+            justifyContent="center"
+            sx={{
+              backgroundColor: 'rgba(255, 255, 255, 0.47)',
+              padding: 1,
+            }}
+          >
+            {categories.map((item, index) => (
+              <Grid
+                item
+                container
+                justifyContent="center"
+                alignItems="center"
+                xs={sizes[index]}
+              >
+                <Typography
+                  color="#0D4E458F"
+                  fontFamily="Tiempos Headline"
+                  fontWeight={500}
+                  textAlign="center"
+                  fontSize={19}
+                >
+                  {item}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+          {results.map((citation) => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <CitationProp {...citation} />
+          ))}
+        </Grid>
+      )}
+
       {/* <SearchComponent /> */}
       {/* <Grid
         item

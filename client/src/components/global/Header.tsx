@@ -9,10 +9,10 @@ import {
 import React from 'react';
 
 export default function Header() {
-  const navItems = ['Directory', 'History', 'About'];
+  const navItems = ['Search Directory', 'Search History'];
 
   return (
-    <AppBar position="absolute" component="nav">
+    <AppBar position="sticky" component="nav">
       <Container maxWidth="xl">
         <Toolbar>
           <Typography
@@ -28,11 +28,13 @@ export default function Header() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              flexGrow: 1,
             }}
           >
             Resilience Education
           </Typography>
           <Box
+            right={-100}
             sx={{
               position: 'absoloute',
               display: {
@@ -42,7 +44,14 @@ export default function Header() {
             }}
           >
             {navItems.map((item) => (
-              <Button color="inherit">{item}</Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  console.log('go to ', item);
+                }}
+              >
+                {item}
+              </Button>
             ))}
           </Box>
         </Toolbar>

@@ -5,7 +5,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { getData } from '../../util/api';
 
 interface OffenseTypeComponentProps {
   selectedOffense: string[];
@@ -36,6 +37,25 @@ export default function OffenseType({
   // const handleChange = ({event: SelectChangeEvent, newEvent}): void => {
   //   setSelectedOffense(event.target.value);
   // };
+  const loaded = useRef(false);
+  const [data, setData] = useState(offenseTypes);
+
+  const updateOffenseTypes = async (): Promise<void> => {
+    try {
+      await getData('citation/offense_type/all').then((obj) => {
+        // setData()
+        loaded.current = true;
+      });
+    } catch (e) {
+      console.log(e);
+      loaded.current = false;
+    }
+  };
+
+  useEffect(() => {
+    updateOffenseTypes();
+  });
+
   return (
     <Autocomplete
       disablePortal
