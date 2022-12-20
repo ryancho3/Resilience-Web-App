@@ -6,7 +6,9 @@ const COLORS = {
   // https://github.com/hack4impact/chapter-website-template/blob/main/public/style.css
   primaryGreen: '#0a493e',
   secondaryGreen: '#76ca04',
+  darkGreen: '#0D4E45',
   midGreen: '#428f25',
+  neonGreen: '#76CF2D',
   taupe: '#e6ebdb',
   black: '#000000', // Black
   white: '#ffffff', // White

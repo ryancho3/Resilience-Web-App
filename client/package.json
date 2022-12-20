@@ -40,6 +40,7 @@
     "client": "^1.0.0",
     "d3-geo": "^3.0.1",
     "framer-motion": "^7.10.2",
+    "material-ui-image": "^3.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { colors } from '@mui/material';
+import { red } from '@mui/material/colors';
 import COLORS from '../../assets/colors';
 
 interface SliderButtonProps {
@@ -15,11 +16,12 @@ export default function SliderButton({ setRole, role }: SliderButtonProps) {
   // const [formerColor, setFormerColor] = useState(tabs[0].color);
 
   const containerStyle = {
-    height: 60,
     position: 'relative',
     borderRadius: 50,
     backgroundColor: COLORS.offWhite,
-    padding: 10,
+    width: '100%', // fixed width
+    height: 60, // fixed height
+    padding: 5,
     display: 'flex',
     alignContent: 'flex-start',
     alignItems: 'start',
@@ -27,16 +29,18 @@ export default function SliderButton({ setRole, role }: SliderButtonProps) {
   };
 
   const tabStyle = {
-    height: 30,
+    height: '100%',
+    width: '50%',
     position: 'relative',
     padding: '20px 25px',
     margin: 0,
-    fontFamily: 'sans-serif',
+    fontFamily: 'Druk',
     fontSize: 20,
     color: '#222',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center', // center content horizontally
   };
 
   const selectionStyle = {
