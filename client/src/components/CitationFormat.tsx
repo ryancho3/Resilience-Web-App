@@ -4,6 +4,7 @@ import { Avatar, Grid, Link, Typography } from '@mui/material';
 import ICitation from '../util/types/citation';
 
 type CitationFormatProps = ICitation;
+export const sizes = [3.5, 1, 1, 1.5, 2, 1, 1];
 
 export default function CitationProp(props: CitationFormatProps) {
   const discretionColor = (discretion: string) => {
@@ -30,7 +31,7 @@ export default function CitationProp(props: CitationFormatProps) {
     { content: props.offense_type, size: 1.5 },
     { content: props.keywords, size: 1.5 },
     { content: props.duration, size: 1 },
-    { content: props.relevant_subsections, size: 1, link: props.citation_url },
+    { content: props.citation, size: 1, link: props.citation_url },
   ];
   return (
     <Grid
@@ -45,20 +46,27 @@ export default function CitationProp(props: CitationFormatProps) {
         padding: 1,
       }}
     >
-      {sections.map((item) => (
+      {sections.map((item, i) => (
         <Grid
           item
           container
           justifyContent="center"
           alignItems="center"
-          xs={item.size}
+          xs={sizes[i]}
         >
           {item.link ? (
-            <Link href={item.link} underline="hover">
+            <Link href={item.link} underline="hover" color="blue">
               {item.content}
             </Link>
           ) : (
-            <Typography textAlign="center">{item.content}</Typography>
+            <Typography
+              fontFamily="Tiempos Headline"
+              fontWeight={500}
+              fontSize={18}
+              textAlign="center"
+            >
+              {item.content}
+            </Typography>
           )}
           {item.color ? <Avatar sx={{ bgcolor: item.color }}> </Avatar> : null}
         </Grid>
@@ -66,5 +74,3 @@ export default function CitationProp(props: CitationFormatProps) {
     </Grid>
   );
 }
-
-export const sizes = [4, 1, 1, 1.5, 1.5, 1, 1];

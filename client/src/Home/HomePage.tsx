@@ -143,18 +143,18 @@ function HomePage() {
               padding: 1,
             }}
           >
-            {categories.map((item, index) => (
+            {categories.map((item, i) => (
               <Grid
                 item
                 container
                 justifyContent="center"
                 alignItems="center"
-                xs={sizes[index]}
+                xs={sizes[i]}
               >
                 <Typography
                   color="#0D4E458F"
                   fontFamily="Tiempos Headline"
-                  fontWeight={500}
+                  fontWeight={700}
                   textAlign="center"
                   fontSize={19}
                 >

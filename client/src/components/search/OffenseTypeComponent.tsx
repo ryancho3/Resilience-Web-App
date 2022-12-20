@@ -43,7 +43,10 @@ export default function OffenseType({
   const updateOffenseTypes = async (): Promise<void> => {
     try {
       await getData('citation/offense_type/all').then((obj) => {
-        // setData()
+        const dats = obj.data;
+        dats.map((item: any) => setData((prev) => [...prev, item.offense]));
+
+        // setData(obj.data);
         loaded.current = true;
       });
     } catch (e) {
@@ -52,9 +55,7 @@ export default function OffenseType({
     }
   };
 
-  useEffect(() => {
-    updateOffenseTypes();
-  });
+  // updateOffenseTypes();
 
   return (
     <Autocomplete
@@ -62,10 +63,11 @@ export default function OffenseType({
       multiple
       filterSelectedOptions
       id="offense-select"
-      options={offenseTypes}
+      options={loaded ? data : offenseTypes}
       value={selectedOffense}
       onChange={(event, newValue) => {
         setSelectedOffense(newValue);
+        console.log(data);
       }}
       fullWidth
       // eslint-disable-next-line react/jsx-props-no-spreading
