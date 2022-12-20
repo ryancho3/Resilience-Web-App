@@ -12,7 +12,24 @@ interface OffenseTypeComponentProps {
   selectedOffense: string[];
   setSelectedOffense: (t: string[]) => void;
 }
-
+// { offense: 'Any felony' },
+// { offense: 'Any Misdeameanor' },
+// { offense: 'Child Support offenses' },
+// { offense: 'Controlled substances offenses' },
+// { offense: 'Crime of moral turpitude' },
+// {
+//   offense:
+//     'Crimes involving fraud, dishonesty, misrepresentation or money-laundering',
+// },
+// { offense: "Crimes of violence, including 'person offenses'" },
+// { offense: 'Election-related offenses' },
+// { offense: 'Motor vehicle offenses' },
+// { offense: 'N/A (background check, general relief)' },
+// { offense: 'Public corruption offenses' },
+// { offense: 'Recreational license offenses' },
+// { offense: 'Sex offenses' },
+// { offense: 'Weapon offenses' },
+// { offense: 'Other' },
 const offenseTypes = [
   'Any felony',
   'Any Misdeameanor',
@@ -34,19 +51,20 @@ export default function OffenseType({
   selectedOffense,
   setSelectedOffense,
 }: OffenseTypeComponentProps) {
-  // const handleChange = ({event: SelectChangeEvent, newEvent}): void => {
-  //   setSelectedOffense(event.target.value);
-  // };
   const loaded = useRef(false);
   const [data, setData] = useState(offenseTypes);
 
   const updateOffenseTypes = async (): Promise<void> => {
     try {
       await getData('citation/offense_type/all').then((obj) => {
-        const dats = obj.data;
-        dats.map((item: any) => setData((prev) => [...prev, item.offense]));
-
-        // setData(obj.data);
+        // eslint-disable-next-line func-names
+        const offenseArray: string[] = obj.data.map(function (item: {
+          offense: string;
+        }) {
+          return item.offense;
+        });
+        offenseArray.push('Any felony');
+        setData(offenseArray.sort());
         loaded.current = true;
       });
     } catch (e) {
@@ -55,7 +73,7 @@ export default function OffenseType({
     }
   };
 
-  // updateOffenseTypes();
+  updateOffenseTypes();
 
   return (
     <Autocomplete
@@ -67,7 +85,6 @@ export default function OffenseType({
       value={selectedOffense}
       onChange={(event, newValue) => {
         setSelectedOffense(newValue);
-        console.log(data);
       }}
       fullWidth
       // eslint-disable-next-line react/jsx-props-no-spreading
