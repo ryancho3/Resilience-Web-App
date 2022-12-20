@@ -7,7 +7,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import theme from './assets/theme';
 import { store, persistor } from './util/redux/store';
 import NotFoundPage from './NotFound/NotFoundPage';
-import HomePage from './Home/HomePage';
 import AdminDashboardPage from './AdminDashboard/AdminDashboardPage';
 import {
   UnauthenticatedRoutesWrapper,
@@ -20,6 +19,7 @@ import RegisterPage from './Authentication/RegisterPage';
 import LoginPage from './Authentication/LoginPage';
 import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
+import HomePage from './Home/HomePage';
 
 function App() {
   return (
