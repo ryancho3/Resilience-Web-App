@@ -49,6 +49,9 @@ export default function SearchComponent() {
 
   async function handleClear() {
     dispatch(clearCitations());
+    setSelectedMapState('');
+    setSelectedKeyWords([]);
+    setSelectedOffense([]);
   }
 
   return (
@@ -147,11 +150,11 @@ export default function SearchComponent() {
           variant="contained"
           onClick={async () => {
             handleClear();
-            console.log(
-              await (
-                await getData('citation/offense_type/all')
-              ).data,
-            );
+            // console.log(
+            //   await (
+            //     await getData('citation/offense_type/all')
+            //   ).data,
+            // );
           }}
         >
           Reset Search
