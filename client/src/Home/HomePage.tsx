@@ -15,7 +15,7 @@ import SearchComponent from '../components/search/SearchComponent';
 import { getData } from '../util/api';
 import COLORS from '../assets/colors';
 import { selectCitations } from '../util/redux/citationSlice';
-import CitationProp from '../components/CitationFormat';
+import CitationProp, { sizes } from '../components/CitationFormat';
 
 interface PromoteButtonProps {
   admin: boolean | null;
@@ -77,6 +77,16 @@ function HomePage() {
   // const results = useRef(null);
   const results = useAppSelector(selectCitations).citations;
 
+  const categories = [
+    'Title',
+    'Discretion',
+    'Jurisdiction',
+    'Offense',
+    'Keywords',
+    'Duration',
+    'Citation Link',
+  ];
+
   // const message = `Welcome to the Boilerplate, ${user.firstName} ${user.lastName}!`;
   return (
     <ScreenGrid>
@@ -84,13 +94,13 @@ function HomePage() {
       <Grid container justifyContent="center" sx={{ marginTop: 12 }}>
         <Grid item container xs={9} justifyContent="center">
           <Typography
-            variant="h4"
+            variant="h3"
             fontFamily="Druk Trial"
             fontWeight={700}
             noWrap
             color={COLORS.primaryGreen}
             sx={{
-              backgroundColor: COLORS.secondaryGreen,
+              // backgroundColor: COLORS.secondaryGreen,
               padding: 1,
               marginBottom: 2,
             }}
@@ -114,7 +124,45 @@ function HomePage() {
         </Grid>
       </Grid>
       {results.length > 0 && (
-        <Grid container sx={{ backgroundColor: 'red' }} rowSpacing={1}>
+        <Grid
+          container
+          justifyItems="center"
+          display="grid"
+          gridTemplateRows="repeat(5, 1fr)"
+          rowSpacing={1}
+          marginTop={3}
+        >
+          <Grid
+            item
+            container
+            xs={11.5}
+            border="#B7C8BA"
+            justifyContent="center"
+            sx={{
+              backgroundColor: 'rgba(255, 255, 255, 0.47)',
+              padding: 1,
+            }}
+          >
+            {categories.map((item, index) => (
+              <Grid
+                item
+                container
+                justifyContent="center"
+                alignItems="center"
+                xs={sizes[index]}
+              >
+                <Typography
+                  color="#0D4E458F"
+                  fontFamily="Tiempos Headline"
+                  fontWeight={500}
+                  textAlign="center"
+                  fontSize={19}
+                >
+                  {item}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
           {results.map((citation) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CitationProp {...citation} />

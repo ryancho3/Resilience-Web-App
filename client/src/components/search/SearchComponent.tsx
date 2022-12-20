@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, InputLabel, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { getOutcomes } from '../../util/api';
+import { getData, getOutcomes } from '../../util/api';
 import StateComponent from './StateComponent';
 import OffenseType from './OffenseTypeComponent';
 import KeyWords from './KeyWordsComponent';
@@ -130,12 +130,13 @@ export default function SearchComponent() {
           }}
           type="reset"
           variant="contained"
-          onClick={() => {
-            // setSelectedOffense([]);
-            // setSelectedKeyWords([]);
-            // setSelectedMapState('');
+          onClick={async () => {
             handleClear();
-            console.log(citations);
+            console.log(
+              await (
+                await getData('citation/offense_type/all')
+              ).data,
+            );
           }}
         >
           Reset Search
