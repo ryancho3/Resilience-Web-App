@@ -102,10 +102,16 @@ const register = async (
   res: express.Response,
   next: express.NextFunction,
 ) => {
-  const { firstName, lastName, email, password } = req.body;
-  if (!firstName || !lastName || !email || !password) {
+  const { firstName, lastName, email, password, role } = req.body;
+  if (!firstName || !lastName || !email || !password || !role) {
     next(
-      ApiError.missingFields(['firstName', 'lastName', 'email', 'password']),
+      ApiError.missingFields([
+        'firstName',
+        'lastName',
+        'email',
+        'password',
+        'role',
+      ]),
     );
     return;
   }
@@ -149,6 +155,7 @@ const register = async (
       lastName,
       lowercaseEmail,
       password,
+      role,
     );
     // Don't need verification email if testing
     if (process.env.NODE_ENV === 'test') {
