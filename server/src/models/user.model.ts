@@ -53,6 +53,7 @@ const UserSchema = new mongoose.Schema({
 
 interface IUser extends mongoose.Document {
   _id: string;
+  role: string;
   firstName: string;
   lastName: string;
   email: string;

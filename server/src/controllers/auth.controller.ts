@@ -102,11 +102,18 @@ const register = async (
   res: express.Response,
   next: express.NextFunction,
 ) => {
-  const { firstName, lastName, email, password } = req.body;
-  if (!firstName || !lastName || !email || !password) {
+  const { role, firstName, lastName, email, password } = req.body;
+  if (!role || !firstName || !lastName || !email || !password) {
     next(
-      ApiError.missingFields(['firstName', 'lastName', 'email', 'password']),
+      ApiError.missingFields([
+        'role',
+        'firstName',
+        'lastName',
+        'email',
+        'password',
+      ]),
     );
+    console.log(req.body);
     return;
   }
   const emailRegex =
@@ -116,7 +123,10 @@ const register = async (
 
   const nameRegex = /^[a-z ,.'-]+/i;
 
+  const roleRegex = /^[A-Za-z]+$/;
+
   if (
+    !role.match(roleRegex) ||
     !email.match(emailRegex) ||
     !password.match(passwordRegex) ||
     !firstName.match(nameRegex) ||
@@ -145,6 +155,7 @@ const register = async (
   // Create user and send verification email
   try {
     const user = await createUser(
+      role,
       firstName,
       lastName,
       lowercaseEmail,

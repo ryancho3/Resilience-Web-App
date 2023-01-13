@@ -12,6 +12,7 @@ import {
   InputErrorMessage,
   nameRegex,
   passwordRegex,
+  roleRegex,
 } from '../util/inputvalidation';
 import { register } from './api';
 import AlertDialog from '../components/AlertDialog';
@@ -37,7 +38,7 @@ function RegisterPage() {
     confirmPassword: '',
   };
   const defaultShowErrors = {
-    role: '',
+    role: false,
     firstName: false,
     lastName: false,
     email: false,
@@ -109,6 +110,11 @@ function RegisterPage() {
       }
     }
 
+    if (!values.role.match(roleRegex)) {
+      setErrorMessage('role', InputErrorMessage.INVALID_NAME);
+      setShowError('role', true);
+      isValid = false;
+    }
     if (!values.firstName.match(nameRegex)) {
       setErrorMessage('firstName', InputErrorMessage.INVALID_NAME);
       setShowError('firstName', true);
@@ -158,6 +164,7 @@ function RegisterPage() {
           setErrorMessage('alert', e.message);
         });
     }
+    console.log(values.role);
   }
 
   const title = 'Sign Up';
@@ -184,6 +191,7 @@ function RegisterPage() {
                     aria-labelledby="role"
                     defaultValue="fip"
                     name="row-radio-buttons-group"
+                    onChange={(e) => setValue('role', e.target.value)}
                   >
                     <FormControlLabel
                       value="fip"

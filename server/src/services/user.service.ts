@@ -20,6 +20,7 @@ const removeSensitiveDataQueryKeepPassword = [
 
 /**
  * Creates a new user in the database.
+ * @param role - string representing the user's role
  * @param firstName - string representing the first name of the user
  * @param lastName - string representing the last name of the user
  * @param email - string representing the email of the user
@@ -27,6 +28,7 @@ const removeSensitiveDataQueryKeepPassword = [
  * @returns The created {@link User}
  */
 const createUser = async (
+  role: string,
   firstName: string,
   lastName: string,
   email: string,
@@ -37,6 +39,7 @@ const createUser = async (
     return null;
   }
   const newUser = new User({
+    role,
     firstName,
     lastName,
     email,
