@@ -10,6 +10,7 @@ import { Router } from 'express';
 import adminRouter from './admin.route';
 import authRouter from './auth.route';
 import citationRouter from './citation.route';
+import userRouter from './user.route';
 
 const prefixToRouterMap: { prefix: string; router: Router }[] = [
   {
@@ -23,6 +24,10 @@ const prefixToRouterMap: { prefix: string; router: Router }[] = [
   {
     prefix: '/api/citation',
     router: citationRouter,
+  },
+  {
+    prefix: '/api/user',
+    router: userRouter,
   },
 ];
 
