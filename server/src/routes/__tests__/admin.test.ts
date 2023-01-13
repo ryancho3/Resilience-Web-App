@@ -310,6 +310,7 @@ describe('testing admin routes', () => {
     beforeEach(async () => {
       // Register users
       let response = await agent.post('/api/auth/register').send({
+        role: testRole,
         email: testEmail,
         password: testPassword,
         firstName: testFirstName,
@@ -320,6 +321,7 @@ describe('testing admin routes', () => {
       expect(await Session.countDocuments()).toBe(0);
 
       response = await agent.post('/api/auth/register').send({
+        role: testRole,
         email: testEmail2,
         password: testPassword2,
         firstName: testFirstName2,
@@ -330,6 +332,7 @@ describe('testing admin routes', () => {
       expect(await Session.countDocuments()).toBe(0);
 
       response = await agent.post('/api/auth/register').send({
+        role: testRole,
         email: testEmail3,
         password: testPassword3,
         firstName: testFirstName3,
@@ -340,6 +343,7 @@ describe('testing admin routes', () => {
       expect(await Session.countDocuments()).toBe(0);
 
       response = await agent.post('/api/auth/register').send({
+        role: testRole,
         email: testEmail4,
         password: testPassword4,
         firstName: testFirstName4,
