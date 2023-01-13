@@ -154,17 +154,19 @@ const register = async (
 
   // Create user and send verification email
   try {
+    console.log('0');
     const user = await createUser(
       role,
       firstName,
       lastName,
       lowercaseEmail,
       password,
-      role,
     );
+    console.log('1');
     // Don't need verification email if testing
     if (process.env.NODE_ENV === 'test') {
       user!.verified = true;
+
       await user?.save();
     } else {
       const verificationToken = crypto.randomBytes(32).toString('hex');
@@ -174,6 +176,7 @@ const register = async (
     }
     res.sendStatus(StatusCode.CREATED);
   } catch (err) {
+    console.log(err);
     next(ApiError.internal('Unable to register user.'));
   }
 };

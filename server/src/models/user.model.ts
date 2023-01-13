@@ -6,6 +6,10 @@ import mongoose from 'mongoose';
 
 // TODO: change token to its own schema to optimize searches
 const UserSchema = new mongoose.Schema({
+  role: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -49,15 +53,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
-  history: {
-    type: Array,
-    required: true,
-    default: [],
-  },
-  role: {
-    type: String,
-    required: true,
-  },
 });
 
 interface IUser extends mongoose.Document {
@@ -71,9 +66,7 @@ interface IUser extends mongoose.Document {
   verificationToken: string | null | undefined;
   resetPasswordToken: string | null | undefined;
   resetPasswordTokenExpiryDate: Date | null | undefined;
-  history: Array<Array<string>> | null;
   admin: boolean;
-  role: string;
 }
 
 const User = mongoose.model<IUser>('User', UserSchema);

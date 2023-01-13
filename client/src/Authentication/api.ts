@@ -61,6 +61,7 @@ async function register(
     password,
   });
   if (res.error) {
+    console.log('Failed');
     throw Error(res.error.message);
   }
 }
