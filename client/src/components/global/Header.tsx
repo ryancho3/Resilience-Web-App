@@ -15,11 +15,11 @@ export default function Header() {
   const navItems = ['Search Directory', 'Search History'];
 
   return (
-    <AppBar position="sticky" component="nav">
+    <AppBar position="absolute" component="nav">
       <Container maxWidth="xl">
         <Toolbar>
           <Typography
-            variant="h3"
+            variant="h4"
             noWrap
             component="a"
             href="/"
@@ -51,7 +51,7 @@ export default function Header() {
                 color="secondary"
                 onClick={() => {
                   if (i === 1) {
-                    nav('/login');
+                    nav('/profile');
                   } else {
                     nav('/home');
                   }

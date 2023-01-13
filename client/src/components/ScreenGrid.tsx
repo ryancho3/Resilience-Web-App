@@ -15,6 +15,7 @@ function ScreenGrid({ children }: AnyChildren) {
       container
       xs={12}
       // height="100vh"
+      minHeight="100vh"
       justifyContent="center"
       alignItems="center"
       flexDirection="column"

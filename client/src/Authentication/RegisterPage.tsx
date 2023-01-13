@@ -186,7 +186,7 @@ function RegisterPage() {
                   style={{
                     fontFamily: 'Druk',
                     fontSize: 64,
-                    color: COLORS.darkGreen,
+                    color: COLORS.primaryDark,
                   }}
                 >
                   {title}
@@ -291,8 +291,8 @@ function RegisterPage() {
                   type="submit"
                   variant="contained"
                   style={{
-                    backgroundColor: COLORS.neonGreen,
-                    color: COLORS.darkGreen,
+                    backgroundColor: COLORS.secondaryGreen,
+                    color: COLORS.primaryGreen,
                     borderRadius: 45,
                     fontFamily: 'Druk',
                     textTransform: 'unset',
