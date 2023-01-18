@@ -42,7 +42,7 @@ async function resolve(promise: Promise<any>) {
 /**
  * To UPDATE DURING DEPLOYMENT USING ENVIRONMENT VARIABLES
  */
-const BACKENDURL = 'http://localhost:3000';
+const BACKENDURL = 'http://localhost:4000';
 
 const URLPREFIX = `${BACKENDURL}/api`;
 
