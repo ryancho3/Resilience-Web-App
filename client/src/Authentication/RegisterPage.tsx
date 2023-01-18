@@ -164,7 +164,7 @@ function RegisterPage() {
           setShowError('alert', true);
           setAlertTitle('');
           setRegistered(true);
-          setErrorMessage('alert', 'Check email to verify account');
+          setErrorMessage('alert', 'Check email to verify your account.');
         })
         .catch((e) => {
           setShowError('alert', true);
