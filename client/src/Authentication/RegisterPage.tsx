@@ -152,7 +152,6 @@ function RegisterPage() {
 
   async function handleSubmit() {
     if (validateInputs()) {
-      console.log(values);
       register(
         values.role,
         values.firstName,
@@ -171,7 +170,6 @@ function RegisterPage() {
           setErrorMessage('alert', e.message);
         });
     }
-    console.log(values.role);
   }
 
   const title = 'Sign Up';
