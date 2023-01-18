@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Link, TextField, Grid, Typography } from '@mui/material';
+import { Link, TextField, Grid, Typography, colors } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { fontFamily } from '@mui/system';
 import FormCol from '../components/form/FormCol';
 import {
   emailRegex,
@@ -19,7 +17,10 @@ import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import ScreenGrid from '../components/ScreenGrid';
 import FormRow from '../components/form/FormRow';
+import SliderButton from '../components/buttons/SliderButton';
 import FormGrid from '../components/form/FormGrid';
+import COLORS from '../assets/colors';
+import 'client/src/index.css';
 
 /**
  * A page users visit to be able to register for a new account by inputting
@@ -144,6 +145,11 @@ function RegisterPage() {
     return isValid;
   };
 
+  const textFieldStyle = {
+    background: COLORS.offWhite,
+    fontFamily: 'Druk',
+  };
+
   async function handleSubmit() {
     if (validateInputs()) {
       console.log(values);
@@ -165,6 +171,7 @@ function RegisterPage() {
           setErrorMessage('alert', e.message);
         });
     }
+    console.log(values.role);
   }
 
   const title = 'Sign Up';
@@ -177,34 +184,37 @@ function RegisterPage() {
         justifyContent="center"
         sx={{ height: '100vh' }}
       >
-        <Grid item md={6} xs={12} sx={{ padding: 5 }}>
+        <Grid item md={6} xs={12} sx={{ padding: 20 }}>
           <FormGrid>
             <FormCol>
-              <Grid item container justifyContent="center">
-                <Typography variant="h2">{title}</Typography>
+              <Grid item container justifyContent="left">
+                <Typography
+                  variant="h1"
+                  style={{
+                    fontFamily: 'Druk',
+                    fontSize: 64,
+                    color: COLORS.primaryDark,
+                  }}
+                >
+                  {title}
+                </Typography>
               </Grid>
               <Grid item width="1">
                 <FormControl>
-                  <FormLabel id="role">I am an...</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="role"
-                    defaultValue="fip"
-                    name="row-radio-buttons-group"
-                    onChange={(e) => setValue('role', e.target.value)}
+                  <FormLabel
+                    id="role"
+                    style={{
+                      fontFamily: 'Druk',
+                      color: COLORS.primaryGreen,
+                      fontSize: 20,
+                    }}
                   >
-                    <FormControlLabel
-                      value="fip"
-                      control={<Radio />}
-                      label="FIP"
-                    />
-                    <FormControlLabel
-                      value="hr"
-                      control={<Radio />}
-                      label="HR Manager"
-                    />
-                  </RadioGroup>
+                    I am an...
+                  </FormLabel>
                 </FormControl>
+              </Grid>
+              <Grid item container justifyContent="center">
+                <SliderButton setRole={setValue} role={values.role} />
               </Grid>
               <FormRow>
                 <Grid item width=".5">
@@ -218,6 +228,7 @@ function RegisterPage() {
                     label="First Name"
                     value={values.firstName}
                     onChange={(e) => setValue('firstName', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
                 <Grid item width=".5">
@@ -231,6 +242,7 @@ function RegisterPage() {
                     label="Last Name"
                     value={values.lastName}
                     onChange={(e) => setValue('lastName', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
               </FormRow>
@@ -245,6 +257,7 @@ function RegisterPage() {
                   label="Email"
                   value={values.email}
                   onChange={(e) => setValue('email', e.target.value)}
+                  style={textFieldStyle as React.CSSProperties}
                 />
               </Grid>
               <FormRow>
@@ -259,6 +272,7 @@ function RegisterPage() {
                     label="Password"
                     value={values.password}
                     onChange={(e) => setValue('password', e.target.value)}
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
                 <Grid item container width=".5">
@@ -274,6 +288,7 @@ function RegisterPage() {
                     onChange={(e) =>
                       setValue('confirmPassword', e.target.value)
                     }
+                    style={textFieldStyle as React.CSSProperties}
                   />
                 </Grid>
               </FormRow>
@@ -282,24 +297,60 @@ function RegisterPage() {
                   fullWidth
                   type="submit"
                   variant="contained"
-                  color="primary"
+                  style={{
+                    backgroundColor: COLORS.secondaryGreen,
+                    color: COLORS.primaryGreen,
+                    borderRadius: 45,
+                    fontFamily: 'Druk',
+                    textTransform: 'unset',
+                    fontSize: 22,
+                    padding: 8,
+                    fontWeight: 500,
+                  }}
                   onClick={() => handleSubmit()}
                 >
                   Create account
                 </PrimaryButton>
               </Grid>
               <FormRow>
-                <Grid container justifyContent="center">
+                <Grid
+                  container
+                  justifyContent="center"
+                  style={{ fontFamily: 'Druk', fontSize: 18 }}
+                >
+                  Already have an account?&nbsp;
                   <Link component={RouterLink} to="../">
-                    Back to Login
+                    Log in
                   </Link>
                 </Grid>
               </FormRow>
             </FormCol>
           </FormGrid>
         </Grid>
-        <Grid item md={6} xs={12} sx={{ height: '100vh', bgcolor: '#EDEBEB' }}>
-          <Typography variant="h2" textAlign="center" />
+        <Grid
+          item
+          md={6}
+          xs={12}
+          sx={{
+            height: '100vh',
+            bgcolor: COLORS.primaryGreen,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 1,
+          }}
+        >
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/5bc4fff016b6405451831f02/1542583791493-LWCZCRGAQRX0OAXNT8OD/REbiggerWHITE.png?format=1500w"
+            alt="Logo"
+            style={{
+              width: '66%',
+              height: '9%',
+              top: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          />
         </Grid>
         {/* The alert that pops up */}
         <Grid item>

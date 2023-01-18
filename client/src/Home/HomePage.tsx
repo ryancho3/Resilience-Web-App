@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography } from '@mui/material';
+import ReactToPrint from 'react-to-print';
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
 import {
   logout as logoutAction,
@@ -91,7 +92,12 @@ function HomePage() {
   return (
     <ScreenGrid>
       <Header />
-      <Grid container justifyContent="center" sx={{ marginTop: 12 }}>
+      <Grid
+        container
+        justifyContent="center"
+        // height="100vh"
+        sx={{ marginTop: 12 }}
+      >
         <Grid item container xs={9} justifyContent="center">
           <Typography
             variant="h3"
@@ -169,24 +175,6 @@ function HomePage() {
           ))}
         </Grid>
       )}
-
-      {/* <SearchComponent /> */}
-      {/* <Grid
-        item
-        container
-        justifyContent="center"
-        xs={12}
-        sx={{ backgroundColor: 'green', padding: 10, height: 100 }}
-      >
-        <PromoteButton
-          admin={admin}
-          handleSelfPromote={handleSelfPromote}
-          navigator={navigator}
-        />
-      </Grid>
-      <Grid justifyContent="center">
-        <Button onClick={handleLogout}>Logout</Button>
-      </Grid> */}
     </ScreenGrid>
   );
 }

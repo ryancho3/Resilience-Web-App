@@ -30,6 +30,7 @@
     "axios": "^1.1.2",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
+    "framer-motion": "^7.10.2",
     "maps": "^0.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -12,6 +12,7 @@ import { loginUser } from './api';
 import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import ScreenGrid from '../components/ScreenGrid';
+import COLORS from '../assets/colors';
 
 /**
  * A page allowing users to input their email and password to login. The default
@@ -110,6 +111,10 @@ function LoginPage() {
     return isValid;
   };
 
+  const textFieldStyle = {
+    background: COLORS.offWhite,
+  };
+
   async function handleSubmit() {
     if (validateInputs()) {
       loginUser(values.email, values.password)
@@ -138,11 +143,19 @@ function LoginPage() {
         justifyContent="center"
         sx={{ height: '100vh' }}
       >
-        <Grid item lg={6} md={6} sm={12} xs={12} sx={{ padding: 5 }}>
+        <Grid item lg={6} md={6} sm={12} xs={12} sx={{ padding: 20 }}>
           <FormGrid>
             <FormCol>
-              <Grid item container justifyContent="center">
-                <Typography variant="h2" textAlign="center">
+              <Grid item container justifyContent="left">
+                <Typography
+                  variant="h1"
+                  style={{
+                    fontFamily: 'Druk',
+                    fontSize: 64,
+                    color: COLORS.darkGreen,
+                    paddingBottom: 15,
+                  }}
+                >
                   Log in
                 </Typography>
               </Grid>
@@ -156,6 +169,7 @@ function LoginPage() {
                   label="Email"
                   value={values.email}
                   onChange={(e) => setValue('email', e.target.value)}
+                  style={textFieldStyle as React.CSSProperties}
                 />
               </Grid>
               <Grid item width="1">
@@ -168,6 +182,7 @@ function LoginPage() {
                   label="Password"
                   value={values.password}
                   onChange={(e) => setValue('password', e.target.value)}
+                  style={textFieldStyle as React.CSSProperties}
                 />
               </Grid>
               <Grid item container justifyContent="center">
@@ -175,20 +190,30 @@ function LoginPage() {
                   fullWidth
                   type="submit"
                   variant="contained"
+                  style={{
+                    backgroundColor: COLORS.neonGreen,
+                    color: COLORS.darkGreen,
+                    borderRadius: 45,
+                    fontFamily: 'Druk',
+                    textTransform: 'unset',
+                    fontSize: 22,
+                    padding: 8,
+                    fontWeight: 500,
+                  }}
                   onClick={() => handleSubmit()}
                 >
-                  Login
+                  Log in
                 </PrimaryButton>
               </Grid>
               <FormRow>
-                <Grid item>
+                <Grid item style={{ fontFamily: 'Druk', fontSize: 18 }}>
                   <Link component={RouterLink} to="/email-reset">
                     Forgot password?
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item style={{ fontFamily: 'Druk', fontSize: 18 }}>
                   <Link component={RouterLink} to="/register">
-                    Sign up
+                    Sign Up
                   </Link>
                 </Grid>
               </FormRow>
@@ -197,13 +222,28 @@ function LoginPage() {
         </Grid>
         <Grid
           item
-          lg={6}
           md={6}
-          sm={12}
           xs={12}
-          sx={{ height: '100vh', bgcolor: '#EDEBEB' }}
+          sx={{
+            height: '100vh',
+            bgcolor: COLORS.primaryGreen,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 1,
+          }}
         >
-          <Typography variant="h2" textAlign="center" />
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/5bc4fff016b6405451831f02/1542583791493-LWCZCRGAQRX0OAXNT8OD/REbiggerWHITE.png?format=1500w"
+            alt="Logo"
+            style={{
+              width: '66%',
+              height: '9%',
+              top: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          />
         </Grid>
       </Grid>
       {/* The alert that pops up */}

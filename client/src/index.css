@@ -6,3 +6,17 @@
     justify-content: center;
 }
 
+@font-face {
+    font-family: 'Druk';
+    src: url('client/src/assets/druktext.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Tiempos Headline';
+    src: url('client/src/assets/tiemposheadline.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
