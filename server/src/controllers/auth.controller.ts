@@ -154,7 +154,6 @@ const register = async (
 
   // Create user and send verification email
   try {
-    console.log('0');
     const user = await createUser(
       role,
       firstName,
@@ -162,7 +161,6 @@ const register = async (
       lowercaseEmail,
       password,
     );
-    console.log('1');
     // Don't need verification email if testing
     if (process.env.NODE_ENV === 'test') {
       user!.verified = true;
