@@ -35,8 +35,7 @@ function App() {
                   <Route element={<UnauthenticatedRoutesWrapper />}>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/home" element={<HomePage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+
                     <Route
                       path="/verify-account/:token"
                       element={<VerifyAccountPage />}
@@ -51,7 +50,10 @@ function App() {
                     />
                   </Route>
                   {/* Routes accessed only if user is authenticated */}
-                  <Route element={<ProtectedRoutesWrapper />} />
+                  <Route element={<ProtectedRoutesWrapper />}>
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />{' '}
+                  </Route>
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
                   </Route>

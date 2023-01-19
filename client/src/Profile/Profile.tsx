@@ -67,7 +67,15 @@ function ProfilePage() {
             justifyContent="center"
             fontFamily="Tiempos Headline"
           >
-            Email: xxxx@gmail.com
+            {user.firstName} {user.lastName}
+          </Typography>
+          <Typography
+            variant="h6"
+            textAlign="center"
+            justifyContent="center"
+            fontFamily="Tiempos Headline"
+          >
+            Email: {user.email}
           </Typography>
         </Grid>
       </Grid>
