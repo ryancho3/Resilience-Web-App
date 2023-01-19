@@ -1,67 +1,69 @@
-// /**
-//  * For testing auth.controller.ts and auth.middleware.ts
-//  */
-// import express from 'express';
-// import request from 'supertest';
-// import { Server } from 'http';
-// import MongoStore from 'connect-mongo';
-// import MongoConnection from '../../config/mongoConnection';
-// import createExpressApp from '../../config/createExpressApp';
-// import StatusCode from '../../util/statusCode';
-// import { User } from '../../models/user.model';
-// import Session from '../../models/session.model';
+/**
+ * For testing auth.controller.ts and auth.middleware.ts
+ */
+import express from 'express';
+import request from 'supertest';
+import { Server } from 'http';
+import MongoStore from 'connect-mongo';
+import MongoConnection from '../../config/mongoConnection';
+import createExpressApp from '../../config/createExpressApp';
+import StatusCode from '../../util/statusCode';
+import { User } from '../../models/user.model';
+import Session from '../../models/session.model';
 
-// let dbConnection: MongoConnection;
-// let sessionStore: MongoStore;
-// let app: express.Express;
-// let server: Server;
-// let agent: request.SuperAgentTest;
+let dbConnection: MongoConnection;
+let sessionStore: MongoStore;
+let app: express.Express;
+let server: Server;
+let agent: request.SuperAgentTest;
 
-// const testEmail = 'example@gmail.com';
-// const testPassword = '123456';
-// const testFirstName = 'testFirst';
-// const testLastName = 'testLast';
+const testEmail = 'example@gmail.com';
+const testPassword = '123456';
+const testFirstName = 'testFirst';
+const testLastName = 'testLast';
 
-// beforeAll(async () => {
-//   // connects to an in memory database since this is a testing environment
-//   dbConnection = await MongoConnection.getInstance();
-//   dbConnection.open();
+beforeAll(async () => {
+  // connects to an in memory database since this is a testing environment
+  dbConnection = await MongoConnection.getInstance();
+  dbConnection.open();
 
-//   sessionStore = dbConnection.createSessionStore(); // for storing user sessions in the db
-//   app = createExpressApp(sessionStore); // instantiate express app
-//   server = app.listen(); // instantiate server to listen on some unused port
-//   agent = request.agent(server); // instantiate supertest agent
-// });
+  sessionStore = dbConnection.createSessionStore(); // for storing user sessions in the db
+  app = createExpressApp(sessionStore); // instantiate express app
+  server = app.listen(); // instantiate server to listen on some unused port
+  agent = request.agent(server); // instantiate supertest agent
+});
 
-// afterAll(async () => {
-//   sessionStore.close();
-//   dbConnection.close();
-// });
+afterAll(async () => {
+  sessionStore.close();
+  dbConnection.close();
+});
 
-// beforeEach(async () => {
-//   // Clear the database before each test
-//   dbConnection.clearInMemoryCollections();
-// });
+beforeEach(async () => {
+  // Clear the database before each test
+  dbConnection.clearInMemoryCollections();
+});
 
-// describe('testing authentication routes', () => {
-//   describe('standalone calls to routes', () => {
-//     describe('/register', () => {
-//       it('registering returns 201 CREATED', async () => {
-//         const response = await agent.post('/api/auth/register').send({
-//           email: testEmail,
-//           password: testPassword,
-//           firstName: testFirstName,
-//           lastName: testLastName,
-//         });
-//         expect(response.status).toBe(StatusCode.CREATED);
-//         expect(await Session.countDocuments()).toBe(0);
-//         const user = await User.findOne({ email: testEmail });
-//         expect(user).toBeTruthy();
-//         expect(user?.email).toBe(testEmail);
-//         expect(user?.firstName).toBe(testFirstName);
-//         expect(user?.lastName).toBe(testLastName);
-//       });
-//     });
+describe('testing authentication routes', () => {
+  describe('standalone calls to routes', () => {
+    describe('/register', () => {
+      it('registering returns 201 CREATED', async () => {
+        const response = await agent.post('/api/auth/register').send({
+          email: testEmail,
+          password: testPassword,
+          firstName: testFirstName,
+          lastName: testLastName,
+        });
+        expect(response.status).toBe(StatusCode.CREATED);
+        expect(await Session.countDocuments()).toBe(0);
+        const user = await User.findOne({ email: testEmail });
+        expect(user).toBeTruthy();
+        expect(user?.email).toBe(testEmail);
+        expect(user?.firstName).toBe(testFirstName);
+        expect(user?.lastName).toBe(testLastName);
+      });
+    });
+  });
+});
 
 //     describe('/login', () => {
 //       it('login before register returns 401 UNAUTHORIZED', async () => {
