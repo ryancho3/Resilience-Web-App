@@ -3,12 +3,8 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography } from '@mui/material';
 import ReactToPrint from 'react-to-print';
 import { useAppDispatch, useAppSelector } from '../util/redux/hooks';
-import {
-  logout as logoutAction,
-  toggleAdmin,
-  selectUser,
-} from '../util/redux/userSlice';
-import { logout as logoutApi, selfUpgrade } from './api';
+import { toggleAdmin, selectUser } from '../util/redux/userSlice';
+import { selfUpgrade } from './api';
 import ScreenGrid from '../components/ScreenGrid';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import Header from '../components/global/Header';
@@ -59,21 +55,14 @@ function HomePage() {
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
   const [admin, setAdmin] = useState(user.admin);
-  const logoutDispatch = () => dispatch(logoutAction());
-  const handleLogout = async () => {
-    if (await logoutApi()) {
-      logoutDispatch();
-      navigator('/login', { replace: true });
-    }
-  };
 
-  const handleSelfPromote = async () => {
-    const newAdminStatus = await selfUpgrade(user.email as string);
-    if (newAdminStatus) {
-      dispatch(toggleAdmin());
-      setAdmin(true);
-    }
-  };
+  // const handleSelfPromote = async () => {
+  //   const newAdminStatus = await selfUpgrade(user.email as string);
+  //   if (newAdminStatus) {
+  //     dispatch(toggleAdmin());
+  //     setAdmin(true);
+  //   }
+  // };
 
   // const results = useRef(null);
   const results = useAppSelector(selectCitations).citations;
@@ -129,7 +118,7 @@ function HomePage() {
           <SearchComponent />
         </Grid>
       </Grid>
-      {results.length > 0 && (
+      {results?.length > 0 && (
         <Grid
           container
           justifyItems="center"

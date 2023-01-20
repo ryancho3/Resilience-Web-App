@@ -13,8 +13,7 @@ import Header from '../components/global/Header';
 import SearchComponent from '../components/search/SearchComponent';
 import { getData } from '../util/api';
 import COLORS from '../assets/colors';
-import { selectCitations } from '../util/redux/citationSlice';
-import CitationProp, { sizes } from '../components/CitationFormat';
+import { logout as logoutApi } from '../Home/api';
 
 /**
  * The Profile page of the user dashboard.
@@ -23,6 +22,14 @@ function ProfilePage() {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
+  const logoutDispatch = () => dispatch(logoutAction());
+
+  const handleLogout = async () => {
+    if (await logoutApi()) {
+      logoutDispatch();
+      navigator('/login', { replace: true });
+    }
+  };
 
   const history = [
     { jurisdiction: 'Wyoming', offenseType: 'Any Felony', keyWords: 'test' },
@@ -137,6 +144,21 @@ function ProfilePage() {
           </Grid>
         ))}
       </Grid>
+      <PrimaryButton
+        sx={{
+          color: 'white',
+          mt: 1,
+          borderRadius: 10,
+          backgroundColor: 'gray',
+        }}
+        type="reset"
+        variant="contained"
+        onClick={async () => {
+          handleLogout();
+        }}
+      >
+        Log out
+      </PrimaryButton>
     </ScreenGrid>
   );
 }

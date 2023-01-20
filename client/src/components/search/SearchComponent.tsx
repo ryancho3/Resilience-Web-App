@@ -15,6 +15,8 @@ import {
   search as searchCitations,
   selectCitations,
 } from '../../util/redux/citationSlice';
+import { addSearch } from '../../Profile/api';
+import { selectUser } from '../../util/redux/userSlice';
 
 interface SearchComponentProps {
   results: any[];
@@ -28,22 +30,24 @@ export default function SearchComponent() {
 
   const dispatch = useAppDispatch();
   function dispatchCitations(citations: Array<ICitation>) {
-    console.log(citations);
     dispatch(searchCitations({ citations, loading: false }));
   }
 
-  const navigate = useNavigate();
-  const citations = useAppSelector(selectCitations);
+  const user = useAppSelector(selectUser);
 
   async function handleSubmit() {
     if (mapState !== '' && offense.length > 0) {
-      getOutcomes('citation/citations', mapState, offense, keywords).then(
-        (obj) => {
-          console.log('get here');
+      getOutcomes('citation/citations', mapState, offense, keywords)
+        .then((obj) => {
           dispatchCitations(obj.data);
-          // navigate('/home');
-        },
-      );
+        })
+        .then(() => {
+          try {
+            addSearch('63c99f424d6513b18b510cc6', mapState, offense, keywords);
+          } catch (err) {
+            console.log(err);
+          }
+        });
     }
   }
 
@@ -150,11 +154,6 @@ export default function SearchComponent() {
           variant="contained"
           onClick={async () => {
             handleClear();
-            // console.log(
-            //   await (
-            //     await getData('citation/offense_type/all')
-            //   ).data,
-            // );
           }}
         >
           Reset Search
