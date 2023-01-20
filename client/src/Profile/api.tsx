@@ -16,11 +16,11 @@ async function addSearch(
 ) {
   console.log(jurisdiction);
   const res = await postData('user/history', {
-    email: 'daviscam@wharton.upenn.edu',
-    jurisdiction: 'test',
+    email,
+    jurisdiction,
     // eslint-disable-next-line camelcase
-    offense_type: 'test',
-    keywords: 'test',
+    offense_type: offenseType[0],
+    keywords: keywords[0],
   });
   console.log(res.data);
   if (res.error) return false;
