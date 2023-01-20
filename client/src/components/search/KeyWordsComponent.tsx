@@ -69,12 +69,6 @@ export default function KeyWords({
       renderInput={(params) => (
         <TextField variant="outlined" {...params} label="Key Words" />
       )}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          // console.log(event.currentTarget.);
-          // your handler code
-        }
-      }}
     />
   );
 }
