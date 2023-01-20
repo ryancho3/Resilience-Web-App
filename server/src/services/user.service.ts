@@ -158,6 +158,7 @@ const addHistoryByEmail = async (email: string, params: {}) => {
   const user = await User.findOneAndUpdate(
     { email },
     { $push: { history: params } },
+    { returnNewDocument: true },
   )
     .select(removeSensitiveDataQuery)
     .exec();

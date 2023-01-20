@@ -9,17 +9,20 @@ import { postData } from '../util/api';
  * @returns true if successful, false otherwise
  */
 async function addSearch(
-  id: string,
+  email: string,
   jurisdiction: string,
   offenseType: string[],
   keywords: string[],
 ) {
-  const res = await postData(`users/${id}/history`, {
+  console.log(jurisdiction);
+  const res = await postData('user/history', {
+    email,
     jurisdiction,
     offenseType,
     keywords,
   });
   if (res.error) return false;
+
   return true;
 }
 

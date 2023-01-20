@@ -43,8 +43,9 @@ export default function SearchComponent() {
         })
         .then(() => {
           try {
-            addSearch('63c99f424d6513b18b510cc6', mapState, offense, keywords);
+            addSearch(user.email || '', mapState, offense, keywords);
           } catch (err) {
+            console.log('failed');
             console.log(err);
           }
         });

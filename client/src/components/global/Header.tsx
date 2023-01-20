@@ -55,8 +55,6 @@ export default function Header() {
                   } else {
                     nav('/home');
                   }
-                  console.log('your on');
-                  // console.log('go to ', item);
                 }}
               >
                 {item}
