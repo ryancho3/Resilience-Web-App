@@ -2,7 +2,45 @@
 import express from 'express';
 import StatusCode from '../util/statusCode';
 import ApiError from '../util/apiError';
-import { addHistoryById, getUserById } from '../services/user.service';
+import { getUserById, addHistoryByEmail } from '../services/user.service';
+
+// const addHistory = async (
+//   req: express.Request,
+//   res: express.Response,
+//   next: express.NextFunction,
+// ) => {
+//   // eslint-disable-next-line camelcase
+//   const { id } = req.params;
+//   const { jurisdiction, offense_type, keywords } = req.body;
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const params: any = {};
+//   if (jurisdiction) {
+//     params.jurisdiction = jurisdiction;
+//   }
+//   if (offense_type) {
+//     params.offense_type = offense_type;
+//   }
+//   if (keywords) {
+//     params.keywords = { $regex: keywords };
+//   }
+//   if (!id) {
+//     next(ApiError.missingFields(['id']));
+//   }
+//   if (typeof id !== 'string') {
+//     next(ApiError.badRequest('Bad Request'));
+//   }
+//   return (
+//     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+//     addHistoryById(id!, params)
+//       .then((user) => {
+//         res.status(StatusCode.OK).send(user);
+//       })
+//       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//       .catch((e) => {
+//         next(ApiError.internal('Unable to add history for given parameters'));
+//       })
+//   );
+// };
 
 const addHistory = async (
   req: express.Request,
@@ -10,8 +48,7 @@ const addHistory = async (
   next: express.NextFunction,
 ) => {
   // eslint-disable-next-line camelcase
-  const { id } = req.params;
-  const { jurisdiction, offense_type, keywords } = req.body;
+  const { email, jurisdiction, offense_type, keywords } = req.body;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const params: any = {};
   if (jurisdiction) {
@@ -23,15 +60,15 @@ const addHistory = async (
   if (keywords) {
     params.keywords = { $regex: keywords };
   }
-  if (!id) {
-    next(ApiError.missingFields(['id']));
+  if (!email) {
+    next(ApiError.missingFields(['email']));
   }
-  if (typeof id !== 'string') {
+  if (typeof email !== 'string') {
     next(ApiError.badRequest('Bad Request'));
   }
   return (
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    addHistoryById(id!, params)
+    addHistoryByEmail(email!, params)
       .then((user) => {
         res.status(StatusCode.OK).send(user);
       })
@@ -69,4 +106,4 @@ const getUser = async (
   );
 };
 
-export { addHistory, getUser };
+export { addHistory, getUser, addHistoryByEmail };

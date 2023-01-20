@@ -153,6 +153,17 @@ const addHistoryById = async (id: string, params: {}) => {
   return user;
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+const addHistoryByEmail = async (email: string, params: {}) => {
+  const user = await User.findOneAndUpdate(
+    { email },
+    { $push: { history: params } },
+  )
+    .select(removeSensitiveDataQuery)
+    .exec();
+  return user;
+};
+
 export {
   passwordHashSaltRounds,
   createUser,
@@ -165,4 +176,5 @@ export {
   upgradeUserToAdmin,
   deleteUserById,
   addHistoryById,
+  addHistoryByEmail,
 };
