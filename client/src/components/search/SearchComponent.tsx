@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, InputLabel, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { getData, getOutcomes } from '../../util/api';
+import { Box, Grid, Typography } from '@mui/material';
+import { getOutcomes } from '../../util/api';
 import StateComponent from './StateComponent';
 import OffenseType from './OffenseTypeComponent';
 import KeyWords from './KeyWordsComponent';
@@ -13,7 +12,6 @@ import ICitation from '../../util/types/citation';
 import {
   clear as clearCitations,
   search as searchCitations,
-  selectCitations,
 } from '../../util/redux/citationSlice';
 import { addSearch } from '../../Profile/api';
 import { selectUser } from '../../util/redux/userSlice';
@@ -26,7 +24,6 @@ export default function SearchComponent() {
   const [mapState, setSelectedMapState] = useState('');
   const [offense, setSelectedOffense] = useState<string[]>([]);
   const [keywords, setSelectedKeyWords] = useState<string[]>([]);
-  const showAlert = false;
 
   const dispatch = useAppDispatch();
   function dispatchCitations(citations: Array<ICitation>) {

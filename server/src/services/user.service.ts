@@ -155,10 +155,12 @@ const addHistoryById = async (id: string, params: {}) => {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const addHistoryByEmail = async (email: string, params: {}) => {
+  console.log(params);
+
   const user = await User.findOneAndUpdate(
     { email },
-    { $push: { history: params } },
-    { returnNewDocument: true },
+    { $addToSet: { history: params } },
+    { new: true },
   )
     .select(removeSensitiveDataQuery)
     .exec();

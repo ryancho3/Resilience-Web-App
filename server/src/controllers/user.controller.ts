@@ -58,7 +58,7 @@ const addHistory = async (
     params.offense_type = offense_type;
   }
   if (keywords) {
-    params.keywords = { $regex: keywords };
+    params.keywords = keywords;
   }
   if (!email) {
     next(ApiError.missingFields(['email']));

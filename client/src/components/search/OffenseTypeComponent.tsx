@@ -12,24 +12,6 @@ interface OffenseTypeComponentProps {
   selectedOffense: string[];
   setSelectedOffense: (t: string[]) => void;
 }
-// { offense: 'Any felony' },
-// { offense: 'Any Misdeameanor' },
-// { offense: 'Child Support offenses' },
-// { offense: 'Controlled substances offenses' },
-// { offense: 'Crime of moral turpitude' },
-// {
-//   offense:
-//     'Crimes involving fraud, dishonesty, misrepresentation or money-laundering',
-// },
-// { offense: "Crimes of violence, including 'person offenses'" },
-// { offense: 'Election-related offenses' },
-// { offense: 'Motor vehicle offenses' },
-// { offense: 'N/A (background check, general relief)' },
-// { offense: 'Public corruption offenses' },
-// { offense: 'Recreational license offenses' },
-// { offense: 'Sex offenses' },
-// { offense: 'Weapon offenses' },
-// { offense: 'Other' },
 const offenseTypes = [
   'Any felony',
   'Any Misdeameanor',

@@ -65,15 +65,6 @@ export default function KeyWords({
       onChange={(event, newValue) => {
         setSelectedKeyWords(newValue);
       }}
-      // sx={{
-      //   display: 'inline-block',
-      //   '& input': {
-      //     borderRadius: 8,
-      //     bgcolor: 'white',
-      //     color: (theme) =>
-      //       theme.palette.getContrastText(theme.palette.background.paper),
-      //   },
-      // }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       renderInput={(params) => (
         <TextField variant="outlined" {...params} label="Key Words" />

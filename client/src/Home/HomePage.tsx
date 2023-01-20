@@ -77,7 +77,6 @@ function HomePage() {
     'Citation Link',
   ];
 
-  // const message = `Welcome to the Boilerplate, ${user.firstName} ${user.lastName}!`;
   return (
     <ScreenGrid>
       <Header />
@@ -115,6 +114,7 @@ function HomePage() {
       </Grid>
       <Grid container>
         <Grid item flexDirection="row" xs={12} sx={{ paddingY: 2 }}>
+          {/* The component used to search the database */}
           <SearchComponent />
         </Grid>
       </Grid>
